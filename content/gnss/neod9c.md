@@ -4,6 +4,7 @@ date: 2023-09-09T15:48:07+09:00
 draft: true
 toc: false
 images:
+url: /gnss/neod9c
 tags:
   - GNSS
 ---
