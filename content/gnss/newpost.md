@@ -1,8 +1,9 @@
 +++
 title = 'Newpost'
 date = 2023-09-09T11:29:26+09:00
-draft = true
+draft = false
 +++
 
 # Test1
 Test
+我的文章
