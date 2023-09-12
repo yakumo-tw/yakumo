@@ -23,7 +23,7 @@ BM4AIK-1? 後面那個問號就是他轉發了沒有插入中繼呼號的損壞�
 #### 亂碼問題
 
 一個實作正常的 DIGI 系統應當，有 CRC 校驗封包的正確性，但是我們觀察到，儘管 VP-DIGI 的 Github 頁面聲稱實作了 CRC 校驗，但是實際投入使用，仍然會觀察到亂碼的問題出現。(如下圖所示)
-![](https://hackmd.io/_uploads/r1qaWyA02.jpg)
+![](https://hackmd.io/_uploads/SkSDceAA3.jpg)
 ## 應對方案
 由於部分採用該方案的社群，對於上述的問題視為正常現象，並且有擴大佈署設備的趨勢。
 
