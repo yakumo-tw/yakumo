@@ -6,7 +6,7 @@ toc: false
 images:
 tags:
   - 業餘無線電
-  * APRS
+  - APRS
 ---
 
 ## 前言
