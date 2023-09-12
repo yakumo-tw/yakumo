@@ -6,6 +6,7 @@ toc: false
 images:
 tags:
   - 業餘無線電
+  - APRS
 ---
 ## 計畫內容
 採用HF波段來進行 APRS 的發送，以便實驗透過短波發送自身座標的實用性。

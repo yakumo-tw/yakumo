@@ -6,6 +6,7 @@ toc: false
 images:
 tags:
   - 業餘無線電
+  - APRS
 ---
 ## 概要
 這個專案是我們引用sh123 的[開源 LoRa 專案] (https://github.com/sh123/esp32_loraprs)
