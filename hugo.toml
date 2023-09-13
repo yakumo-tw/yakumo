@@ -132,8 +132,8 @@ disableHugoGeneratorInject = false
     theme = "#1b1c1d"
 
   [params.logo]
-    logoMark     = ">"
-    logoText     = "$ cd /home/"
+    logoMark     = "yakumo@root$>"
+    logoText     = "cd 八雲"
     logoHomeLink = "/"
     # Set true to remove the logo cursor entirely.
     # logoCursorDisabled = false
@@ -190,7 +190,7 @@ disableHugoGeneratorInject = false
   [[menu.main]]
     identifier = "關於八雲"
     name       = "關於八雲"
-    url        = "about/"
+    url        = "about/me"
   [[menu.main]]
     identifier = "八雲無線"
     name       = "八雲無線"
