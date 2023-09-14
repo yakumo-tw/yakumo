@@ -186,7 +186,7 @@ disableHugoGeneratorInject = false
 #    weight    = 2
 #    copyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
 
-[menu]
+# [menu]
   [[menu.main]]
     identifier = "關於八雲"
     name       = "關於八雲"
