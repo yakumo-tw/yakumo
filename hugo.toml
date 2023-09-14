@@ -1,4 +1,4 @@
-baseURL = "https://yakumo.tw"
+baseURL = "https://127.0.0.1"
 title   = "八雲"
 languageCode = "zh-tw"
 theme = "hello-friend-ng"
@@ -132,7 +132,7 @@ disableHugoGeneratorInject = false
     theme = "#1b1c1d"
 
   [params.logo]
-    logoMark     = "yakumo@root$>"
+    logoMark     = "root@yakumo$>"
     logoText     = "cd 八雲"
     logoHomeLink = "/"
     # Set true to remove the logo cursor entirely.
