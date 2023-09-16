@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>APRS on 八雲</title>
+    <link>http://localhost:1313/tags/aprs/</link>
+    <description>Recent content in APRS on 八雲</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Tue, 12 Sep 2023 23:37:50 +0900</lastBuildDate><atom:link href="http://localhost:1313/tags/aprs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>關於台灣 APRS 系統的一些問題</title>
+      <link>http://localhost:1313/posts/2023/09/aprs/</link>
+      <pubDate>Tue, 12 Sep 2023 23:37:50 +0900</pubDate>
+      
+      <guid>http://localhost:1313/posts/2023/09/aprs/</guid>
+      <description>前言 在筆者我之前的文章中有提到， APRS 為聯邦式系統，由不同的火腿所管理，也能使用各式多樣化的設備來實作出功能。
+然而有些設備卻有著些潛在的問題需要解決。
+VP-DIGI VP-DIGI 為一個開源的硬體 TNC 解決方案，它的優勢是以低成本的方式來購艦出一個 DIGI 的系統，但是根據友站的觀察以及筆者自身瀏覽網站時發現 VP-DIGI 有以下幾個潛在的問題。
+轉發毀損封包 根據下圖資料所示， VP-DIGI 會把 BV7YA-10 轉出來損壞的封包再轉發一次，造成 APRS 頻道上產生不必要的無效封包。 BM4AIK-1? 後面那個問號就是他轉發了沒有插入中繼呼號的損壞封包。 亂碼問題 一個實作正常的 DIGI 系統應當，有 CRC 校驗封包的正確性，但是我們觀察到，儘管 VP-DIGI 的 Github 頁面聲稱實作了 CRC 校驗，但是實際投入使用，仍然會觀察到亂碼的問題出現。(如下圖所示) 應對方案 由於部分採用該方案的社群，對於上述的問題視為正常現象，並且有擴大佈署設備的趨勢。
+為了不要造成頻率上有著大量的無效封包傳輸，占用有限的頻率資源，所以我們用 Direwolf 把有問題站點的封包拒收
+51TNC 51 TNC 是一個熱賣的硬體 TNC ，但是熱賣並不代表沒有問題的出現。 以上文所提到的某個站台，因轉發出來的封包不會插入自身呼號，會變成連續兩個逗點像是 ,,
+這種封包格式完全是錯誤的，伺服器不會收，更不應該被再次轉發，將導致當地APRS網路充斥錯誤封包，51TNC 相關設備會轉發此類封包，如果使用者有使用相關設備，建議尋找替代方案或更換。
+心得與看法 聯邦制以及開放的標準，使的 APRS 的解決方案可以百花齊放，但是面對問題時應當採取積極的態度，而不是置之不理，正所謂有競爭才有進步，才能共創一個良好的 APRS 環境。</description>
+    </item>
+    
+    <item>
+      <title>APRS操作守則</title>
+      <link>http://localhost:1313/posts/2023/09/radio3/</link>
+      <pubDate>Fri, 08 Sep 2023 22:28:21 +0900</pubDate>
+      
+      <guid>http://localhost:1313/posts/2023/09/radio3/</guid>
+      <description>前言 APRS 是一個由各個火腿共同架設站台 (iGate) 和轉發站 (Digi) 的服務，屬於聯邦制的管理架構，而為了共創一個 APRS 的環境以下有幾個建議的守則可以參考並遵守。
+(一) 不要過於頻繁的發送封包。 許多人，可能會覺得說，越頻繁發送封包越好，所以把發報時間設的極短，但是其實這樣會導致 144.64 Mhz 空中頻率壅塞，再加上如果被轉發站 (Digi) 給收到，封包又會重複的被廣播出去，導致整個頻率都是自身的封包，這樣的行為會嚴重導致其他人無法正常使用 APRS 服務。
+建議點 善用「智慧信標」功能，並且參數設定最短 1 分鐘才發射一次。 如果您的追蹤器不支援「智慧信標」的功能則建議最短 1 分鐘才發射一次。 如果因為在實驗自己的站台，而需要大量發射封包，請不要在 144.64 Mhz 頻率上使用，您可以找一個空閒頻率來做實驗。 (二) 架設 iGate 不要開啟 Digi 功能 架設 iGate 開啟 Digi 功能其實非常多此一舉。
+建議點 架設 iGate 不要開啟 Digi 功能。 (三) 確認封包完整性 這個問題主要發生在許多硬體 TNC 上面，有時候封包經由有潛在問題的 TNC上面轉發或接收，會造成字串變成亂碼。
+建議點 使用軟體式 TNC 軟體 TNC 現在無論是解碼靈敏度，還是封包完整性，都比傳統硬體 TNC 來要的好；軟體的部分推薦使用 DireWolf 這套開源解碼軟體。 確認好您的硬體 TNC 沒有潛在的問題，再進行部署。 結語 以上就是大家玩 APRS 的時候建議需要注意的部分，如果有問題歡迎詢問。 祝大家 APRS 玩的開心。</description>
+    </item>
+    
+    <item>
+      <title>基於數位模式短波 APRS 座標傳輸實驗</title>
+      <link>http://localhost:1313/posts/2023/09/radio2/</link>
+      <pubDate>Fri, 08 Sep 2023 22:28:17 +0900</pubDate>
+      
+      <guid>http://localhost:1313/posts/2023/09/radio2/</guid>
+      <description>計畫內容 採用HF波段來進行 APRS 的發送，以便實驗透過短波發送自身座標的實用性。
+動機： VARA 是一款西班牙 OM 所開發的高性能軟體數據機。從我接觸了 VarAC軟體後，這款軟體，隨著版本的發展 VARA 支援了 KISS AX.25 的資料模式，這樣的支援使得透過 VARA 進行 HF APRS 的應用得以實現。在幾個月之前我與 BX2AI 進行合作試驗，初步的試驗結果非常的成功但是還有幾點事項要做進行一步的試驗。因為 BX2AI 實驗的條件是屬於效率較高的 HF 車天線，加上有良好的車體接地所以通訊效果非常好，有可能是天線系統良好才達成的，本次 3/18 放假回台試驗，將使用長度不到兩米的「M哥」車天線進行試驗。
+目的：進行這個短波 APRS 的實驗，並非要取代現有的 APRS 系統，而是增加整體生態的多樣性。我的想法如果可以透過車用 HF 天線，進行 NVIS 通訊這樣可以用少數的 HF 接收站台進行全台大範圍的訊號涵蓋，形成一個國內 HF APRS 通訊網。
+實驗設計： BX2AI 位於北部的站台啟動接收，我這端採用「M哥」車線，接地的部分，則採用透過磁貼片地網進行接地。無線電設備則採用中國製的協谷 G90S ，並且使用 20W 的功率進行發射，除此之外還需要使用筆電執行 VARA 數據機軟體與手機 APRS軟體最後配使用 G90S 專用的數據介面盒進行無線電的控制。
+備用計畫：由於筆者於 3/18 回國，在到家放好行李整理好設備 (IC-7300) 後便會前往 BU4AK 的住所進行設備交接，接著我會透過拿到的 G90S 後，開去郊區進行電腦控制電台的測試，萬一遇到 G90S 介面盒異常無法正常運作，我將改用 IC-7300 進行計畫的備案，止步過採用的車天線無法以 100W 進行發射，根據「M哥」賣家提供的資訊，天線的耐入力不能超過 40W ，所以保險起見如果使用 IC-7300 發射將會把功率限制在 30W</description>
+    </item>
+    
+    <item>
+      <title>APRS over LoRa 系統介紹</title>
+      <link>http://localhost:1313/posts/2023/09/radio/</link>
+      <pubDate>Fri, 08 Sep 2023 22:28:13 +0900</pubDate>
+      
+      <guid>http://localhost:1313/posts/2023/09/radio/</guid>
+      <description>&lt;h2 id=&#34;概要&#34;&gt;概要&lt;/h2&gt;
+&lt;p&gt;這個專案是我們引用sh123 的[開源 LoRa 專案] (&lt;a href=&#34;https://github.com/sh123/esp32_loraprs&#34;&gt;https://github.com/sh123/esp32_loraprs&lt;/a&gt;)
+進行改寫的部分，在這個倉庫中裡面的版本，有些是移除掉藍芽功能純跑 iGate 的程式碼，由於藍芽佔的程式體積過於龐大，所以我把它給移除，並且加進去了 OTA 的功能，以利遠端維護程式碼。&lt;/p&gt;
+&lt;h2 id=&#34;簡介&#34;&gt;簡介&lt;/h2&gt;
+&lt;p&gt;傳統的封包無線電中，我們在 FM 上使用 AFSK (Bell 202) 調變傳輸 AX.25 訊框；不過到了 2020 年配合物聯網使用的低成本無線通訊模組變得常見，其中 LoRa 協定特別適合使用於業餘無線電中(有現成的，能運作在 UHF 業餘頻段的模組)，於是我們構想透過 LoRa 來進行 APRS 封包的傳輸。
+LoRa是一個低功率遠距離的傳輸協定，它可以透過展頻來增強在弱信號狀況下的解碼能力，且對 CW (Continuous Wave) 干擾有一定的免疫能力。
+經歷了很久的發展，我們的板子到了第三代，雖然我們的專案停滯了一段時間，但最近我們重啟了這項專案。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

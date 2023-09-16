@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="BX4ACP ">
+<meta name="description" content="概要 這個專案是我們引用sh123 的[開源 LoRa 專案] (https://github.com/sh123/esp32_loraprs) 進行改寫的部分，在這個倉庫中裡面的版本，有些是移除掉藍芽功能純跑 iGate 的程式碼，由於藍芽佔的程式體積過於龐大，所以我把它給移除，並且加進去了 OTA 的功能，以利遠端維護程式碼。
+簡介 傳統的封包無線電中，我們在 FM 上使用 AFSK (Bell 202) 調變傳輸 AX.25 訊框；不過到了 2020 年配合物聯網使用的低成本無線通訊模組變得常見，其中 LoRa 協定特別適合使用於業餘無線電中(有現成的，能運作在 UHF 業餘頻段的模組)，於是我們構想透過 LoRa 來進行 APRS 封包的傳輸。 LoRa是一個低功率遠距離的傳輸協定，它可以透過展頻來增強在弱信號狀況下的解碼能力，且對 CW (Continuous Wave) 干擾有一定的免疫能力。 經歷了很久的發展，我們的板子到了第三代，雖然我們的專案停滯了一段時間，但最近我們重啟了這項專案。
+" />
+<meta name="keywords" content=", 業餘無線電, APRS" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="http://localhost:1313/posts/2023/09/radio/" />
+
+
+    <title>
+        
+            APRS over LoRa 系統介紹 :: 八雲 
+        
+    </title>
+
+
+
+
+
+<link rel="stylesheet" href="http://localhost:1313/main.b78c3be9451dc4ca61ca377f3dc2cf2e6345a44c2bae46216a322ef366daa399.css" integrity="sha256-t4w76UUdxMphyjd/PcLPLmNFpEwrrkYhajIu82bao5k=">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-K0T9F7QY35"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-K0T9F7QY35');
+</script>
+    <link rel="apple-touch-icon" sizes="180x180" href="http://localhost:1313/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+    <link rel="manifest" href="http://localhost:1313/site.webmanifest">
+    <link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="http://localhost:1313/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+<meta itemprop="name" content="APRS over LoRa 系統介紹">
+<meta itemprop="description" content="概要
+這個專案是我們引用sh123 的[開源 LoRa 專案] (https://github.com/sh123/esp32_loraprs)
+進行改寫的部分，在這個倉庫中裡面的版本，有些是移除掉藍芽功能純跑 iGate 的程式碼，由於藍芽佔的程式體積過於龐大，所以我把它給移除，並且加進去了 OTA 的功能，以利遠端維護程式碼。
+簡介
+傳統的封包無線電中，我們在 FM 上使用 AFSK (Bell 202) 調變傳輸 AX.25 訊框；不過到了 2020 年配合物聯網使用的低成本無線通訊模組變得常見，其中 LoRa 協定特別適合使用於業餘無線電中(有現成的，能運作在 UHF 業餘頻段的模組)，於是我們構想透過 LoRa 來進行 APRS 封包的傳輸。
+LoRa是一個低功率遠距離的傳輸協定，它可以透過展頻來增強在弱信號狀況下的解碼能力，且對 CW (Continuous Wave) 干擾有一定的免疫能力。
+經歷了很久的發展，我們的板子到了第三代，雖然我們的專案停滯了一段時間，但最近我們重啟了這項專案。"><meta itemprop="datePublished" content="2023-09-08T22:28:13+09:00" />
+<meta itemprop="dateModified" content="2023-09-08T22:28:13+09:00" />
+<meta itemprop="wordCount" content="390"><meta itemprop="image" content="http://localhost:1313/"/>
+<meta itemprop="keywords" content="業餘無線電,APRS," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://localhost:1313/"/>
+
+<meta name="twitter:title" content="APRS over LoRa 系統介紹"/>
+<meta name="twitter:description" content="概要
+這個專案是我們引用sh123 的[開源 LoRa 專案] (https://github.com/sh123/esp32_loraprs)
+進行改寫的部分，在這個倉庫中裡面的版本，有些是移除掉藍芽功能純跑 iGate 的程式碼，由於藍芽佔的程式體積過於龐大，所以我把它給移除，並且加進去了 OTA 的功能，以利遠端維護程式碼。
+簡介
+傳統的封包無線電中，我們在 FM 上使用 AFSK (Bell 202) 調變傳輸 AX.25 訊框；不過到了 2020 年配合物聯網使用的低成本無線通訊模組變得常見，其中 LoRa 協定特別適合使用於業餘無線電中(有現成的，能運作在 UHF 業餘頻段的模組)，於是我們構想透過 LoRa 來進行 APRS 封包的傳輸。
+LoRa是一個低功率遠距離的傳輸協定，它可以透過展頻來增強在弱信號狀況下的解碼能力，且對 CW (Continuous Wave) 干擾有一定的免疫能力。
+經歷了很久的發展，我們的板子到了第三代，雖然我們的專案停滯了一段時間，但最近我們重啟了這項專案。"/>
+
+
+
+    <meta property="og:title" content="APRS over LoRa 系統介紹" />
+<meta property="og:description" content="概要
+這個專案是我們引用sh123 的[開源 LoRa 專案] (https://github.com/sh123/esp32_loraprs)
+進行改寫的部分，在這個倉庫中裡面的版本，有些是移除掉藍芽功能純跑 iGate 的程式碼，由於藍芽佔的程式體積過於龐大，所以我把它給移除，並且加進去了 OTA 的功能，以利遠端維護程式碼。
+簡介
+傳統的封包無線電中，我們在 FM 上使用 AFSK (Bell 202) 調變傳輸 AX.25 訊框；不過到了 2020 年配合物聯網使用的低成本無線通訊模組變得常見，其中 LoRa 協定特別適合使用於業餘無線電中(有現成的，能運作在 UHF 業餘頻段的模組)，於是我們構想透過 LoRa 來進行 APRS 封包的傳輸。
+LoRa是一個低功率遠距離的傳輸協定，它可以透過展頻來增強在弱信號狀況下的解碼能力，且對 CW (Continuous Wave) 干擾有一定的免疫能力。
+經歷了很久的發展，我們的板子到了第三代，雖然我們的專案停滯了一段時間，但最近我們重啟了這項專案。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/2023/09/radio/" /><meta property="og:image" content="http://localhost:1313/"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-09-08T22:28:13+09:00" />
+<meta property="article:modified_time" content="2023-09-08T22:28:13+09:00" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2023-09-08 22:28:13 &#43;0900 JST" />
+
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="http://localhost:1313/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">root@yakumo$&gt;</span>
+            <span class="logo__text ">
+                cd 八雲</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="http://localhost:1313/gnss/">八雲定位</a></li><li><a href="http://localhost:1313/posts/">八雲無線</a></li><li><a href="http://localhost:1313/other/">八雲雜記</a></li><li><a href="http://localhost:1313/yuujin/">友站介紹</a></li><li><a href="http://localhost:1313/about/me">關於八雲</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+  <main class="post">
+
+    <div class="post-info">
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        2 minutes
+
+        
+      </p>
+    </div>
+
+    <article>
+      <h1 class="post-title">
+        <a href="http://localhost:1313/posts/2023/09/radio/">APRS over LoRa 系統介紹</a>
+      </h1>
+
+      
+
+      
+
+      
+
+      <div class="post-content">
+        <h2 id="概要">概要</h2>
+<p>這個專案是我們引用sh123 的[開源 LoRa 專案] (<a href="https://github.com/sh123/esp32_loraprs">https://github.com/sh123/esp32_loraprs</a>)
+進行改寫的部分，在這個倉庫中裡面的版本，有些是移除掉藍芽功能純跑 iGate 的程式碼，由於藍芽佔的程式體積過於龐大，所以我把它給移除，並且加進去了 OTA 的功能，以利遠端維護程式碼。</p>
+<h2 id="簡介">簡介</h2>
+<p>傳統的封包無線電中，我們在 FM 上使用 AFSK (Bell 202) 調變傳輸 AX.25 訊框；不過到了 2020 年配合物聯網使用的低成本無線通訊模組變得常見，其中 LoRa 協定特別適合使用於業餘無線電中(有現成的，能運作在 UHF 業餘頻段的模組)，於是我們構想透過 LoRa 來進行 APRS 封包的傳輸。
+LoRa是一個低功率遠距離的傳輸協定，它可以透過展頻來增強在弱信號狀況下的解碼能力，且對 CW (Continuous Wave) 干擾有一定的免疫能力。
+經歷了很久的發展，我們的板子到了第三代，雖然我們的專案停滯了一段時間，但最近我們重啟了這項專案。</p>
+<h2 id="專案特色">專案特色</h2>
+<ul>
+<li>相容性高：我們只有把實體層的傳輸協定改成 LoRa 其他層協定皆與傳統 APRS 無異，因此可以相容現有 APRS 的軟體。</li>
+<li>成本低廉：追蹤器成本標配目前價格為 725 元，需搭配安卓手機使用。</li>
+<li>開源免費：我們的電路圖以及程式碼皆以 GPL 3.0 開源條款授權，您可以自由地使用這個專案。</li>
+<li>通用性：除了可用我們設計的板子之外，還可以使用TTGO T-Beam 、 T-Echo 的現成開發版來發射(但是比較不建議)</li>
+</ul>
+<h2 id="價格表">價格表</h2>
+<h3 id="三代">三代</h3>
+<ul>
+<li>標配版本 725 元。</li>
+<li>GNSS模駔 +500 元。</li>
+<li>充電版 +100 元。</li>
+<li>OLED +125 元。</li>
+<li>電池 尚未採購。</li>
+</ul>
+<h3 id="四代">四代</h3>
+<ul>
+<li>
+<p>標配版本 等待報價中。</p>
+</li>
+<li>
+<p>GNSS模駔 +500 元。</p>
+</li>
+<li>
+<p>充電版 +100 元。</p>
+</li>
+<li>
+<p>OLED +125 元。</p>
+</li>
+<li>
+<p>目前三代版沒有現貨，而一次訂購需要做五片，大約需要兩千多元的成本，所以有興趣購買者可以聯絡我，我會盡快安排。</p>
+</li>
+</ul>
+<h2 id="實際運作">實際運作</h2>
+<p>我們採用了國外開源作者 sh123 的<a href="https://github.com/sh123/esp32_loraprs">開源LoRa專案</a>進行使用，而這個倉庫是存放我們修改過的程式碼，這個專案蠻符合我們的需求，所以就採用這個作者的開源作品，大家有興趣可以進去專案的頁面點個星星鼓勵作者。
+sh123 的程式可以不使用 GNSS 定位模組，透過手機藍芽連接 ESP32 ，然後丟資料給 ESP32 之後再透過 LoRa 模組進行發射。
+另外原本基於 ESP32 的 TNC 接收到封包後還必須透過 USB 序列傳輸到電腦的 APRS 軟體內，最後再上傳到 aprs.fi 上，但是 sh123 的專案的解決方案，為直接使用 ESP32 的網路功能進行封包的上傳，這樣架設接收站台，就不需要依賴電腦或樹梅派了。
+在某些需求下有可能會使用 GNSS 模組例如：認為依賴手機不便者或是說使用 ios 的使用者，這個時候可以考慮選配版子的 GNSS 模組進行改裝，再搭配 BX4ACV 寫的程式碼來進行燒綠。
+如果沒有版子但是有 TTGO T-Beam 、 T-Echo的版子，最近我成功移植到這兩個平台，不過功能還在測試中，使用時可能會遇到一些問題。</p>
+<h2 id="待完成的坑軟體方面">待完成的坑(軟體方面)</h2>
+<ul>
+<li>雖然 sh123 的專案很讚，但仍有一些缺點，例如：它的 BLE 功能有問題，無法正常運作，這樣導致 ios 的使用者透過 APP 進行連線時功能無法正常的運作。</li>
+<li>DIGI 功能有潛在的問題，尚在研究中。</li>
+</ul>
+<h3 id="空中-ax25-訊框格式">空中 AX.25 訊框格式</h3>
+<p>與標準 AX.25 相同，有使用 CRC 來檢查封包是否毀損，如果毀損就丟棄。</p>
+<h2 id="材料零件">材料/零件</h2>
+<h3 id="追蹤器">追蹤器</h3>
+<p>如果你想要自己訂製 LoRa 板子可以到板子作者 BV5DJ 的<a href="https://oshwlab.com/GabeH/esp32-lora-aprs">專案頁面</a>存取，板子的電路圖，並且送訂單給嘉利創製造板子，當然這也是開源的，所以你也可以自己重新設計自己喜歡的樣式。
+或是可以在淘寶自行購買 TTGO T-Beam 的 LoRa 開發版來使用，</p>
+<h2 id="通訊距離">通訊距離</h2>
+<p>我們使用發射端運作在 UHF 頻率，以我的基地台 (iGate) 使用 106cm 的車天線，移動端的部分採用 40cm 的手機天線在車車外發射，目前極限距離最遠來到 7Xkm (北屯到梅山鄉瑞峰附近)，在市區的話以台中為例：東半部基本上可以涵蓋，由於我的基地位於北屯，所以台中西邊的區域效果可能會比較差，但經過以放大器增加功率，並把手持機天線吸在汽車引擎蓋上，在台中西側發射仍可以收到封包。
+至於東側部分，目前測試到太平那邊都是可以收到的(如下圖)
+<img src="https://i.imgur.com/mjEsOoi.png" alt="">
+<img src="https://i.imgur.com/3BtYAFu.jpg" alt="">
+<img src="https://i.imgur.com/b3jXKll.jpg" alt="">
+神雅潭自行車道測試( 400mW 40CM 手持機天線)
+<img src="https://i.imgur.com/n1fLJiH.png" alt=""></p>
+<p>新竹外婆家測試，我接收端使用 40cm 手持機天線，然後發射端使用長度很短的普通 433Mhz 通訊天線。以下是測試的結果。
+<img src="https://i.imgur.com/AN6cF3s.jpg" alt="">
+<img src="https://i.imgur.com/OGKoSRt.jpg" alt="">
+<img src="https://i.imgur.com/yfxdXKi.jpg" alt="">
+新竹後來安裝車天線試跑的結果圖</p>
+<h2 id="涵蓋範圍">涵蓋範圍</h2>
+<p>目前實測涵蓋範圍。條件 40cm 手持機天線 2.6W 發射。
+台中站： 106CM 車天線。
+新竹站： 11XCM 車天線。
+雲嘉站： 200木瓜。</p>
+<h3 id="台中">台中</h3>
+<ol>
+<li>北屯區。</li>
+<li>新社區(部分)</li>
+<li>太平區。</li>
+<li>霧峰區。</li>
+<li>西屯區。</li>
+</ol>
+<h3 id="彰化">彰化</h3>
+<ol>
+<li>八卦山-彰化段。</li>
+<li>北斗</li>
+</ol>
+<h3 id="南投">南投</h3>
+<ol>
+<li>八卦山-南投段。</li>
+<li>國道三號南投路段。</li>
+</ol>
+<h3 id="雲林">雲林</h3>
+<ul>
+<li>開車經過有被接收到，實際涵蓋仍需測試。
+<img src="https://i.imgur.com/Y4b8RPA.png" alt=""></li>
+</ul>
+<ol>
+<li>古坑。</li>
+<li>斗六。</li>
+<li>斗南。</li>
+<li>土庫。</li>
+<li>東勢。</li>
+<li>台西。</li>
+<li>麥寮。</li>
+<li>嘉義快速道路沿途。</li>
+<li>西濱沿途等地方。</li>
+<li>國道一號西螺服務區以南，台南鹽水區以北。</li>
+</ol>
+<h2 id="專案連結">專案連結</h2>
+<p><a href="https://github.com/sh123/esp32_loraprs">https://github.com/sh123/esp32_loraprs</a></p>
+<h3 id="專案依賴的函式庫">專案依賴的函式庫</h3>
+<p>依照 sh123 作者的實作，以下是您需要安裝的函式庫。</p>
+<ol>
+<li>Arduino ESP32 (ESP32的開發環境)。</li>
+<li>RadioLib (控制LoRa晶片用的，我們採用SX1268晶片)。</li>
+<li>Arduino Timer。</li>
+<li>CircularBuffer。</li>
+<li>DebugLog。</li>
+</ol>
+<h2 id="通訊參數">通訊參數</h2>
+<p>頻率： <code>430.64Mhz</code>。
+頻寬： <code>125kHz</code>。
+SF： <code>12</code>。
+CR： <code>8</code>。
+CRC： <code>2</code>。
+LORA_EXPLICIT：<code>false </code>。
+SYNC： <code>0x12</code>。
+PWR： <code>22</code></p>
+<h2 id="討論社群">討論社群</h2>
+<p>如果您有興趣想要購買板子來玩或是您遇到問題想要詢問，可以透過以下管道連絡到我們。</p>
+<ol>
+<li>我們的 Telegram 社群 <a href="https://t.me/NeoNetworkHamRadio">https://t.me/NeoNetworkHamRadio</a> 。</li>
+<li>加我的 LINE ID：pepetoad</li>
+</ol>
+<h2 id="qa">Q&amp;A</h2>
+<h3 id="q相比傳統的-fm-afsk-傳輸方式-lora-aprs-有什麼優勢">Q：相比傳統的 FM AFSK 傳輸方式 LoRa APRS 有什麼優勢？</h3>
+<p>LoRa 具有低功率遠距離的優勢，如前文涵蓋範圍的 Demo 我們僅使用不到 3W 的功率(模組本身 1W )就達到了廣大涵蓋範圍，雖然傳輸速度僅僅 18Xbps 但是對於座標的傳送已經十分足夠。</p>
+<h3 id="q為何你們要採用-e22-400m30s-這款模組">Q：為何你們要採用 E22-400M30S 這款模組？</h3>
+<p>當初在選購模組時，主要會採用有兩點：</p>
+<ol>
+<li>模組有一瓦的輸出功率。許多 LoRa 模組僅僅幾百毫瓦，我們認為瓦數過低。(加上功率放大器可以來到 2W 但是模組不能全功率輸出，不然長期下來模組的功率會衰退)。</li>
+<li>該模組採用最新一代的 SX1268 晶片，相比上一代的 SX1278 晶片，新一代的晶片具有更低的功耗以及更強的接收能力，再加上該模組有 LNA 的設計，讓接收的靈敏度最低可達 -14Xdbm 比依據公式計算出來的靈敏度還要更高。</li>
+</ol>
+<h3 id="q為何你們不要使用現成的-lora32-晶片的開發版-ttgo系列-來當追蹤器就好">Q：為何你們不要使用現成的 LoRa32 晶片的開發版( TTGO系列 )來當追蹤器就好？</h3>
+<p>其實我們有購買TTGO T-Beam 的產品來做實驗，但發現了幾個缺點：</p>
+<ol>
+<li>採用上一代晶片。</li>
+<li>輸出功率僅 100mW</li>
+<li>內建的 GNSS 定位模組過於老舊，性能不佳。(新的 T-Beam 改採用較新的晶片，可以考慮購買)
+以上這些因素所以我們自己設計板子，並且使用 E22-400M30S 這款模組，根據我們在國外 LoRa APRS 的社群中觀察發現，已經有人採用這款模組了。
+但是 TTGO T-Beam 的優勢是成本比我們自己製作的來的低，對於預算有限的參予者可以考慮這個選項。</li>
+</ol>
+<ul>
+<li>目前藍芽版本的韌體(sh123)以及使用 TTGO T-Beam 內建的 GNSS 定位模組發射皆可以使用， ios 使用者請安裝使用內建 GNSS 的韌體。</li>
+</ul>
+<h3 id="q我對此專案有興趣可以索取版子來玩嗎要收費嗎有什麼必須條件">Q：我對此專案有興趣，可以索取版子來玩嗎？要收費嗎？有什麼必須條件？</h3>
+<p>如果您的 QTH 位於台中、雲林、嘉義、新竹，這些地區目前有站台涵蓋，如果沒有架設站台意願的人，可以僅索取追蹤器。
+目前三代版，不含 GNSS 定位模組等等附件，<strong>價格725元</strong>。收費是為了專案的永續經營，如果不想付費可以自己送PCB板子去製作，或者是購買價格較低的 TTGO T-Beam 來使用，程式碼的部分已經放在該專案的 GitHub 的倉庫之中。</p>
+<h3 id="q我覺得選配的零件太貴了我可以自己買零件來-diy-嗎">Q：我覺得選配的零件太貴了，我可以自己買零件來 DIY 嗎？</h3>
+<p>可以喔，板子是您自己的，你想怎麼改都行，也歡迎分享改裝心得。</p>
+<h3 id="q前面有聽你提到放大器這個再購買板子時會附嗎">Q：前面有聽你提到放大器，這個再購買板子時會附嗎？</h3>
+<p>根據目前試驗下來的結果，如果不是在都市叢林內，其實 1W 基本上就可以通很遠了，但如果您希望功率可以更大的話可以<a href="https://item.taobao.com/item.htm?id=572168568304">點我</a>購買放大器。
+<strong>請注意：</strong>
+如果您使用放大器，LoRa 模組不得超過 316 mW 否則長期使用下來模組的發射功率會衰減。(調整方式請聯絡我)</p>
+<h3 id="q我有動手做的能力我發現板子上有預留一些電路接頭可以來改造它嗎">Q：我有動手做的能力，我發現板子上有預留一些電路接頭可以來改造它嗎？</h3>
+<p>可以的。我們的專案是全面開源的，而且版子是您自己的，您可以在本頁面找到電路圖等等資訊，在符合 GNU GPLv3 的條件下都可以自由改裝。</p>
+<h2 id="拿到套件該注意的事項">拿到套件該注意的事項</h2>
+<h3 id="開機時請一定要接上天線">開機時請一定要接上天線</h3>
+<p>這樣做是確保在不確定模組何時發射時，不會因為駐波過高而損毀模組，所以請開機後一定要接上天線。</p>
+<h3 id="可以接放大器但">可以接放大器，但&hellip;..</h3>
+<p>請注意放大器的最高功率耐入力，輸入過高的功率給放大器，除了會造成模組的發射晶體功率衰退外，長期使用下來放大器會燒掉(親身經歷)。</p>
+<h3 id="架設igate注意事項">架設iGate注意事項</h3>
+<p>在iGate模式下，當發送信標時，除了會向網路送封包以外，射頻部份也會發射，所以千萬要注意您的天線系統是可以發射的。</p>
+<h3 id="架設站點周圍有強訊號">架設站點周圍有強訊號</h3>
+<p>如果您架設站台周遭會有過強的訊號，你必須買帶通濾波器來過濾強訊號。
+<img src="https://i.imgur.com/LmuoAmr.jpg" alt=""></p>
+<h2 id="關於以及程式碼授權">關於以及程式碼授權</h2>
+<p>此專案所有文檔以及程式碼均以 GNU GPLv3 或更新版本釋出<br>
+程式作者：BX4ACV（交流電）(一代、二代板子的程式碼)、sh123 (三代板子採用)。
+PCB電路板開發：BV5DJ
+程式研究與改良：BX2AHP
+站台場地架設、程式研究：BM2OBM <a href="https://www.tmmarc.org">https://www.tmmarc.org</a>
+感謝以上同好的努力與付出，沒有你們就不會有這個專案。
+專案贊助推廣：BX4ACP（蜜蜂）</p>
+      </div>
+    </article>
+
+    <hr />
+
+    <div class="post-info">
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="http://localhost:1313/tags/%E6%A5%AD%E9%A4%98%E7%84%A1%E7%B7%9A%E9%9B%BB/">業餘無線電</a></span>
+        <span class="tag"><a href="http://localhost:1313/tags/aprs/">APRS</a></span>
+        
+    </p>
+
+      
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        390 Words
+      </p>
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        
+          2023-09-08 22:28
+        
+
+         
+          
+        
+      </p>
+    </div>
+      <hr />
+      <div class="sharing-buttons">
+        
+<a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fposts%2f2023%2f09%2fradio%2f" target="_blank" rel="noopener" aria-label="" title="Share on facebook">
+  <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?url=http%3a%2f%2flocalhost%3a1313%2fposts%2f2023%2f09%2fradio%2f" target="_blank" rel="noopener" aria-label="" title="Share on twitter">
+  <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small">
+      <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.tumblr.com/widgets/share/tool?posttype=link&amp;title=APRS%20over%20LoRa%20%e7%b3%bb%e7%b5%b1%e4%bb%8b%e7%b4%b9&amp;caption=APRS%20over%20LoRa%20%e7%b3%bb%e7%b5%b1%e4%bb%8b%e7%b4%b9&amp;canonicalUrl=http%3a%2f%2flocalhost%3a1313%2fposts%2f2023%2f09%2fradio%2f" target="_blank" rel="noopener" aria-label="" title="Share on tumblr">
+  <div class="resp-sharing-button resp-sharing-button--tumblr resp-sharing-button--small">
+    <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.563 24c-5.093 0-7.031-3.756-7.031-6.411V9.747H5.116V6.648c3.63-1.313 4.512-4.596 4.71-6.469C9.84.051 9.941 0 9.999 0h3.517v6.114h4.801v3.633h-4.82v7.47c.016 1.001.375 2.371 2.207 2.371h.09c.631-.02 1.486-.205 1.936-.419l1.156 3.425c-.436.636-2.4 1.374-4.156 1.404h-.178l.011.002z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="mailto:?subject=APRS%20over%20LoRa%20%e7%b3%bb%e7%b5%b1%e4%bb%8b%e7%b4%b9&amp;body=http%3a%2f%2flocalhost%3a1313%2fposts%2f2023%2f09%2fradio%2f" target="_self" rel="noopener" aria-label="" title="Share via email">
+  <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://pinterest.com/pin/create/button/?url=http%3a%2f%2flocalhost%3a1313%2fposts%2f2023%2f09%2fradio%2f&amp;media=http%3a%2f%2flocalhost%3a1313%2fposts%2f2023%2f09%2fradio%2f;description=APRS%20over%20LoRa%20%e7%b3%bb%e7%b5%b1%e4%bb%8b%e7%b4%b9" target="_blank" rel="noopener" aria-label="" title="Share on pinterest">
+  <div class="resp-sharing-button resp-sharing-button--pinterest resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2f2023%2f09%2fradio%2f&amp;title=APRS%20over%20LoRa%20%e7%b3%bb%e7%b5%b1%e4%bb%8b%e7%b4%b9&amp;summary=APRS%20over%20LoRa%20%e7%b3%bb%e7%b5%b1%e4%bb%8b%e7%b4%b9&amp;source=http%3a%2f%2flocalhost%3a1313%2fposts%2f2023%2f09%2fradio%2f" target="_blank" rel="noopener" aria-label="" title="Share on linkedin">
+  <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=http%3a%2f%2flocalhost%3a1313%2fposts%2f2023%2f09%2fradio%2f&amp;resubmit=true&amp;title=APRS%20over%20LoRa%20%e7%b3%bb%e7%b5%b1%e4%bb%8b%e7%b4%b9" target="_blank" rel="noopener" aria-label="" title="Share on reddit">
+  <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.xing.com/app/user?op=share;url=http%3a%2f%2flocalhost%3a1313%2fposts%2f2023%2f09%2fradio%2f;title=APRS%20over%20LoRa%20%e7%b3%bb%e7%b5%b1%e4%bb%8b%e7%b4%b9" target="_blank" rel="noopener" aria-label="" title="Share on xing">
+  <div class="resp-sharing-button resp-sharing-button--xing resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18.188 0c-.517 0-.741.325-.927.66 0 0-7.455 13.224-7.702 13.657.015.024 4.919 9.023 4.919 9.023.17.308.436.66.967.66h3.454c.211 0 .375-.078.463-.22.089-.151.089-.346-.009-.536l-4.879-8.916c-.004-.006-.004-.016 0-.022L22.139.756c.095-.191.097-.387.006-.535C22.056.078 21.894 0 21.686 0h-3.498zM3.648 4.74c-.211 0-.385.074-.473.216-.09.149-.078.339.02.531l2.34 4.05c.004.01.004.016 0 .021L1.86 16.051c-.099.188-.093.381 0 .529.085.142.239.234.45.234h3.461c.518 0 .766-.348.945-.667l3.734-6.609-2.378-4.155c-.172-.315-.434-.659-.962-.659H3.648v.016z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="whatsapp://send?text=APRS%20over%20LoRa%20%e7%b3%bb%e7%b5%b1%e4%bb%8b%e7%b4%b9%20http%3a%2f%2flocalhost%3a1313%2fposts%2f2023%2f09%2fradio%2f" target="_blank" rel="noopener" aria-label="" title="Share on whatsapp">
+  <div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://news.ycombinator.com/submitlink?u=http%3a%2f%2flocalhost%3a1313%2fposts%2f2023%2f09%2fradio%2f&amp;t=APRS%20over%20LoRa%20%e7%b3%bb%e7%b5%b1%e4%bb%8b%e7%b4%b9" target="_blank" rel="noopener" aria-label="" title="Share on hacker news">
+  <div class="resp-sharing-button resp-sharing-button--hackernews resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M0 24V0h24v24H0zM6.951 5.896l4.112 7.708v5.064h1.583v-4.972l4.148-7.799h-1.749l-2.457 4.875c-.372.745-.688 1.434-.688 1.434s-.297-.708-.651-1.434L8.831 5.896h-1.88z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://telegram.me/share/url?text=APRS%20over%20LoRa%20%e7%b3%bb%e7%b5%b1%e4%bb%8b%e7%b4%b9&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2f2023%2f09%2fradio%2f" target="_blank" rel="noopener" aria-label="" title="Share on telegram">
+  <div class="resp-sharing-button resp-sharing-button--telegram resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+    </div>
+  </div>
+</a>
+
+      </div>
+
+    
+    <div class="pagination">
+        
+
+        <div class="pagination__buttons">
+            
+            <span class="button previous">
+                <a href="http://localhost:1313/posts/2023/09/radio2/">
+                    <span class="button__icon">←</span>
+                    <span class="button__text">基於數位模式短波 APRS 座標傳輸實驗</span>
+                </a>
+            </span>
+            
+
+            
+        </div>
+    </div>
+
+
+    
+
+    
+
+  </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2023</span>
+            <span><a href="http://localhost:1313/">BX4ACP</a></span>
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+            <span><a href="http://localhost:1313/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+            
+        </div>
+    </div>
+    
+    
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span><span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+    
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="http://localhost:1313/bundle.min.205d491810c28f95aa953fae884e1c27abe13fdf93ec63b882d0036b248d4a6282eb2d134e4e7225c6ad6e86db87b08488a361ca4a7383d01fcff43f3d57b9c3.js" integrity="sha512-IF1JGBDCj5WqlT&#43;uiE4cJ6vhP9&#43;T7GO4gtADaySNSmKC6y0TTk5yJcatbobbh7CEiKNhykpzg9Afz/Q/PVe5ww=="></script>
+
+
+
+    </body>
+</html>

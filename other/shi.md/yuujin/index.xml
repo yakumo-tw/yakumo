@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Yuujins on 八雲</title>
+    <link>http://localhost:1313/yuujin/</link>
+    <description>Recent content in Yuujins on 八雲</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Sat, 09 Sep 2023 14:15:27 +0900</lastBuildDate><atom:link href="http://localhost:1313/yuujin/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TMMARC</title>
+      <link>http://localhost:1313/yuujin/site2/</link>
+      <pubDate>Sat, 09 Sep 2023 14:15:27 +0900</pubDate>
+      
+      <guid>http://localhost:1313/yuujin/site2/</guid>
+      <description>介紹 TMMARC 全名為：台灣多模式業餘無線電俱樂部。是我認識的火腿朋友架設的，最初認識是因為研究透過 LoRa 來傳輸位置封包，然後與站長結識，並且提供資源供小弟團隊研究，目前該俱樂部主要研究傳統 APRS 領域，並且在中北部架設了多個 APRS 站台；站台服務範圍很廣，有興趣架設 APRS 系統者可以點進網站內取得聯絡方式。 網站：https://www.tmmarc.org/</description>
+    </item>
+    
+    <item>
+      <title>BU4AK的部落格</title>
+      <link>http://localhost:1313/yuujin/site/</link>
+      <pubDate>Sat, 09 Sep 2023 14:15:11 +0900</pubDate>
+      
+      <guid>http://localhost:1313/yuujin/site/</guid>
+      <description>介紹 BU4AK是一位大學生，是我的好朋友，他常常研究一些無線電技術以及實際通聯；這個網站由他技術的支援，才能因此誕生。 以下是他的部落格，有興趣的朋友可以去看。 網站：https://neochen1024.blogspot.com/</description>
+    </item>
+    
+  </channel>
+</rss>
