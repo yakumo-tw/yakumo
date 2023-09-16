@@ -200,6 +200,10 @@ disableHugoGeneratorInject = false
     name       = "八雲定位"
     url        = "gnss/"
   [[menu.main]]
+    identifier = "八雲雜記"
+    name       = "八雲雜記"
+    url        = "other/"
+  [[menu.main]]
     identifier = "友站介紹"
     name       = "友站介紹"
     url        = "yuujin/"
