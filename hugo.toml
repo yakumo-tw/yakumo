@@ -51,7 +51,7 @@ disableHugoGeneratorInject = false
   dateformShort   = "Jan 2"
   dateformNum     = "2006-01-02"
   dateformNumTime = "2006-01-02 15:04"
-
+  
   # Metadata mostly used in document's head
   # 
   description = "八雲立つ　出雲八重垣　妻ごみに　八重垣つくる　その八重垣を"
