@@ -80,7 +80,8 @@ disableHugoGeneratorInject = false
   # The theme is respecting the prefers-color-scheme of the operating systeme. 
   # With this option on, the page user is able to set the scheme he wants. 
   enableThemeToggle = false
-
+  thumbnailImage = true
+  autoThumbnailImage = true
   # Sharing buttons
   #
   # There are a lot of buttons preconfigured. If you want to change them,
