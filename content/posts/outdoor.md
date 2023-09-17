@@ -1,5 +1,5 @@
 ---
-title: "業餘無線電之出門野架去"
+title: "無線電野架指南"
 date: 2023-09-17T20:33:54+09:00
 draft: false
 toc: false
