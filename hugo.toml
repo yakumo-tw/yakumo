@@ -36,7 +36,7 @@ disableRSS     = false
 disableSitemap = false
 disable404     = false
 disableHugoGeneratorInject = false
-
+picture = "i.jpg"
 [permalinks]
   posts = "/posts/:year/:month/:filename/"
 
@@ -68,7 +68,7 @@ disableHugoGeneratorInject = false
   homeSubtitle = "八雲立つ　出雲八重垣　妻ごみに　八重垣つくる　その八重垣を"
 
   # Set a background for the homepage
-  # backgroundImage = "assets/images/background.jpg"
+   backgroundImage = "static/i.jpg"
 
   # Prefix of link to the git commit detail page. GitInfo must be enabled.
   #
