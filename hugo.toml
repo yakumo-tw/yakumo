@@ -93,7 +93,7 @@ picture = "i.jpg"
   # and add them into your own `layouts/partials/sharing-buttons.html`
   #
   enableSharingButtons = true
-
+  hasCJKLanguage = true
   # Global language menu
   #
   # Enables the global language menu.
