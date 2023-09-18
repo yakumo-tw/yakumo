@@ -3,7 +3,7 @@ title: "主動式小環天線 K-180WLA 開箱"
 date: 2023-09-12T17:21:10+09:00
 draft: false
 toc: false
-images:
+images: [https://hackmd.io/_uploads/BJNoLKTRn.jpg]
 tags:
   - 業餘無線電
   - SWL接收
