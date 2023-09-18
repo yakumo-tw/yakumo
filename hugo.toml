@@ -17,6 +17,7 @@ copyright = "This work is licensed under a Creative Commons Attribution-NonComme
 # googleAnalytics = "G-K0T9F7QY35"
 # disqusShortname = ""
 
+
 archetypeDir = "archetypes"
 contentDir   = "content"
 dataDir      = "data"
