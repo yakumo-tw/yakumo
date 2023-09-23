@@ -21,3 +21,4 @@ tags:
 2. 我焦慮出席率的問題，完全白焦慮了。
 
 最後的我便搭車回去宿舍了，結束了今日的「航站情緣」的鬧劇。
+![](https://hackmd.io/_uploads/rk2Mywnka.jpg)
