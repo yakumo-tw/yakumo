@@ -2,6 +2,7 @@
 title : '御成 Buy 式目之男性和服購買篇'
 date : 2023-09-25T22:43:17+09:00
 draft : false
+images : [https://yakumotw.s3.ap-northeast-1.amazonaws.com/3e9dc2dbb82dd939318d764e47a7e9aa4bc4466739a9bf204577c93ce7881a9f.png]
 tag :
     - 御成Buy式目
     - 網路購物
