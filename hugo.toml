@@ -7,9 +7,10 @@ PygmentsCodeFences = true
 enableRobotsTXT = true
 PygmentsStyle = "monokai"
 [sitemap]
-  changeFreq = ''
+  changeFreq = 'daily'
   filename = 'sitemap.xml'
   priority = -1
+
 paginate  = 10
 rssLimit  = 10  # Maximum number of items in the RSS feed.
 copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License." # This message is only used by the RSS template.
@@ -59,8 +60,8 @@ picture = "i.jpg"
   
   # Metadata mostly used in document's head
   # 
-  description = "八雲立つ　出雲八重垣　妻ごみに　八重垣つくる　その八重垣を"
-  keywords = ""
+  description = "八雲網站提供有關於：衛星定位、業餘無線電、神道教等等資訊內容"
+  keywords = ['業餘無線電','衛星定位','神道教']
   images = ['i.jpg']
   # Home subtitle of the index page.
   #
