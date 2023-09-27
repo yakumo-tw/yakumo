@@ -67,7 +67,8 @@ tags:
 [民宿資訊](https://maps.app.goo.gl/1eNRed7tJN86tig3A)
 
 
-
+***
+# 更多精彩文章[請點我](https://yakumo.tw/posts/2023/09/)
 
 
 

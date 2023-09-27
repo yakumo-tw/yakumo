@@ -86,4 +86,5 @@ YAAC 是一個由 JAVA 所撰寫的APRS軟體，它能在各個平台上運作�
 以下是我環島的實驗所產生的軌跡圖。
 ![](https://hackmd.io/_uploads/B1CnbjY0h.jpg)
 ![](https://hackmd.io/_uploads/r1jpbjFA2.jpg)
-
+***
+# 更多精彩文章[請點我](https://yakumo.tw/posts/2023/09/)

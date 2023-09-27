@@ -56,3 +56,5 @@ tags:
 如果有喜歡想要體驗這家民宿的氣氛，可以[點我進入](https://booking.owlting.com/ruiliteavilla?start=2023-09-20&end=2023-09-21&adult=2&source=gha&child=0&infant=0&lang=zh_TW)訂房網頁。
 
 
+***
+# 更多精彩文章[請點我](https://yakumo.tw/posts/2023/09/)

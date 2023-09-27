@@ -165,4 +165,6 @@ PCB電路板開發：BV5DJ
 站台場地架設、程式研究：BM2OBM https://www.tmmarc.org
 感謝以上同好的努力與付出，沒有你們就不會有這個專案。
 專案贊助推廣：BX4ACP（蜜蜂）  
+***
+# 更多精彩文章[請點我](https://yakumo.tw/posts/2023/09/)
 
