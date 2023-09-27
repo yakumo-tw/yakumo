@@ -3,7 +3,7 @@ title: "從香腸到火腿 業餘無線電 考照入門指南"
 date: 2023-09-27T16:37:38+09:00
 draft: false
 toc: false
-images:
+images: [https://yakumotw.s3.ap-northeast-1.amazonaws.com/7911e37397018b53a2c3edd7a5c10e7f2eb66b1718746128bc2871518526de3a.png]
 tags:
   - 業餘無線電
   - 入門
