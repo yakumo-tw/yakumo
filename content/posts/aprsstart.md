@@ -12,8 +12,11 @@ tags:
 ## 前言
 APRS (全名為： **Automatic Packet Report System** ) 中文稱為自動位置封包回報系統。玩家透過該系統然後經由無線電訊號傳輸來回報自身的位置。在台灣有許多志願者架設 APRS 的接收站台可以接收你報告的位置，然後上傳到 aprs.fi 這個網站並且顯示在地圖上。
 
-雖然可以透過智慧型手機連接手持機，但是因為設定較為複雜，所以這邊就先帶過。
+智慧型手機可以使用的軟體：
+* aprsdroid (安卓)
+* PluseModem A ( IOS )
 
+雖然可以透過智慧型手機連接手持機，但是因為設定較為複雜，所以這邊就先帶過。
 ## 用專門的追蹤器連接手持機。
 透過獨立追蹤器方案的優點是不需要智慧型手機，且能夠透過特製的電纜線控制手持機的 PTT 這樣比較不會「切掉」聲音；目前友站團體 TMMARC (台灣多模式業餘無線電俱樂部)，有訂製少量的追蹤器板子。
 
@@ -28,6 +31,8 @@ APRS (全名為： **Automatic Packet Report System** ) 中文稱為自動位置
 
 ![picture 7](https://yakumotw.s3.ap-northeast-1.amazonaws.com/59395b6381a0a7d44874ebb0c9363c0ea4298ce533347814a1b775e124562ccb.jpg)
 
+![picture 14](https://yakumotw.s3.ap-northeast-1.amazonaws.com/de44b432123ee227b2cfc7e1da6b187a42a44e5618f7d7665ad1add10eb065cd.jpg)  
+呈現在 aprs.fi 的樣子
 ## 相關文章
 [APRS 操作守則](https://yakumo.tw/posts/2023/09/radio3/)
 ***
