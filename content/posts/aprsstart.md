@@ -22,7 +22,7 @@ APRS (全名為： **Automatic Packet Report System** ) 中文稱為自動位置
 
 **這邊要提醒一下，雖然板子是由 TMMARC 所設計，但是 MCU 微控制器內部的韌體為泰國 [APRS Indy](https://project.aprsindy.org/) 所開發設計。**
 
-有興趣可以進一步諮詢 [TMMARC](https://www.tmmarc.org/) 在官方網站上有 LINE 或是透過電子郵件 bu2ge@tmmarc.org 聯絡相關人員。
+有興趣可以進一步諮詢 [TMMARC](https://so.tmmarc.org/RwNOUL) 在官方網站上有 LINE 或是透過電子郵件 bu2ge@tmmarc.org 聯絡相關人員。
 
 下面是板子成品的圖片
 ![picture 12](https://yakumotw.s3.ap-northeast-1.amazonaws.com/34311234a0c27e379579ddde05a976820b87a9093ff90769be5ff5366ebf07d7.jpg) 
