@@ -3,7 +3,7 @@ title: "APRS 超入門 智慧型手機篇"
 date: 2023-09-28T21:54:33+09:00
 draft: false
 toc: false
-images: [https://yakumotw.s3.ap-northeast-1.amazonaws.com/d22bdb8135b7eff1abff8075efaa6dde14db38108a51f25cd302b4417ce3c09f.png]
+images: [(https://yakumotw.s3.ap-northeast-1.amazonaws.com/8be261e0b0ae07632c17a41976ec0ee12a3067b8bc05e7a31e7523eb95ed1bea.png]
 tags:
   - 業餘無線電
   - APRS
