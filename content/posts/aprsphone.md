@@ -1,20 +1,27 @@
 ---
-title: "Aprsphone"
+title: "APRS 超入門 智慧型手機篇"
 date: 2023-09-28T21:54:33+09:00
-draft: true
+draft: false
 toc: false
-images:
+images: [https://yakumotw.s3.ap-northeast-1.amazonaws.com/d22bdb8135b7eff1abff8075efaa6dde14db38108a51f25cd302b4417ce3c09f.png]
 tags:
-  - untagged
+  - 業餘無線電
+  - APRS
+  - 入門
 ---
-## 方案一：手持機開 VOX 搭配智慧型手機
+## 前言
+昨天的[這篇文章](https://yakumo.tw/posts/2023/09/aprsstart/)介紹了使用專門的追蹤器硬體然後搭配手持機進行發射，今天本文則是要介紹透過智慧型手機以及藉由手持機的 VOX 功能進行 PTT 的觸發，進而達到發射的目的。
+> APRS 需要有三等呼號方能使用，如果你還沒有呼號請看[這篇文章](https://yakumo.tw/posts/2023/09/hamtest/) 
+## 原理
 許多手持機的麥克風都是使用 3.5 mm 的孔，我們可以透過 VOX 功能、3.5 mm 音源線以及手機 APP 來進行發射，原理是這樣的：
 1. 手機接收到衛星訊號，丟給 APP 做處理。
 2. APP 產生 APRS 的封包並且調變成聲音。
 3. 透過 3.5 mm 的音源線把聲音送到手持機。
 4. 聲音觸發手持機的 VOX 進而打開 PTT 進行發射。
+## 實戰操作
 
-以下教學這邊就使用 APRSdroid APP 進行示範。
+> 以下教學這邊就使用 APRSdroid APP 進行示範。
+由於現在主流的新手機，已經沒有 3.5 mm 音效孔，所以要開始之前，你必須去手機配件行買一個 USB 轉 3.5 mm 的轉接線。
 
 1. 造訪 https://aprsdroid.org/ 進行 APP 的下載與安裝。
 ![picture 0](https://yakumotw.s3.ap-northeast-1.amazonaws.com/f18ca3705bf258a2ac84f5648f844cbaaa66ad0908dfc8f78718dda32b516e50.png)  
@@ -37,6 +44,7 @@ tags:
 8. 手持機打開 VOX 功能並連接你的智慧型手機。
 9. 點擊右下按鈕，開始發射訊號。
 ![picture 5](https://yakumotw.s3.ap-northeast-1.amazonaws.com/21cef2ebf22123accb781e756304950da9ad968ea7cefc346e2a61946bfa575b.jpg) 
-10. 帶著手持機與你的手機上樓，看看是否能被周遭的站台給收到。
+10. 帶著手持機與你的手機上樓發射，並且開啟 [aprs.fi](https://aprs.fi) ，看看是否能被周遭的站台給收到，如果有被收到，你將會在地圖上看到自己的圖標與呼號。
 
-以上大概是透過 APRSdroid APP 進行最簡單的操作；如果發現手機無法觸發 PTT 那麼請將音量調整到可以完整觸發的大小。
+以上是 APRSdroid APP 進行最簡單的設定與操作，這個 APP 功能很多讀者們可以進行摸索
+> 如果發現手機無法觸發 PTT 那麼請將音量調整到可以完整觸發的大小以及手持機 VOX 靈敏度調到最高。
