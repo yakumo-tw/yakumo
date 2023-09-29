@@ -42,9 +42,15 @@ tags:
 
 7. 設定完成之後，返回首頁。 
 8. 手持機打開 VOX 功能並連接你的智慧型手機。
-9. 點擊右下按鈕，開始發射訊號。
+9. 把手持機轉到 **144.64 Mhz** 並且點擊右下按鈕，開始發射訊號。
 ![picture 5](https://yakumotw.s3.ap-northeast-1.amazonaws.com/21cef2ebf22123accb781e756304950da9ad968ea7cefc346e2a61946bfa575b.jpg) 
 10. 帶著手持機與你的手機上樓發射，並且開啟 [aprs.fi](https://aprs.fi) ，看看是否能被周遭的站台給收到，如果有被收到，你將會在地圖上看到自己的圖標與呼號。
 
 以上是 APRSdroid APP 進行最簡單的設定與操作，這個 APP 功能很多讀者們可以進行摸索
 > 如果發現手機無法觸發 PTT 那麼請將音量調整到可以完整觸發的大小以及手持機 VOX 靈敏度調到最高。
+## 相關文章
+[APRS 操作守則](https://yakumo.tw/posts/2023/09/radio3/)
+
+[透過專門硬體發射](https://yakumo.tw/posts/2023/09/aprsstart/)
+***
+**[我網站的其他文章](https://yakumo.tw/posts/)**
