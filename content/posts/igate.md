@@ -3,7 +3,7 @@ title: "APRS igate 架設記"
 date: 2023-10-14T21:07:16+09:00
 draft: false
 toc: false
-images:
+images: [https://yakumotw.s3.ap-northeast-1.amazonaws.com/9ceef1faaf52419f59980483cb4db0ee1ea742a2d46b4e918d31c2a5753f6aff.jpg]
 tags:
   - 業餘無線電
   - APRS
