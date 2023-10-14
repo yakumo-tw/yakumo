@@ -3,7 +3,7 @@ title: "短波上的即時通 VarAC 新手教學"
 date: 2023-10-14T15:14:38+09:00
 draft: false
 toc: false
-images:
+images: [https://yakumotw.s3.ap-northeast-1.amazonaws.com/783913aa87c1a6a4eef352a2b5fadf084872fdc507628e205fa7b751788d71e7.png]
 tags:
   - 業餘無線電
   - 短波
@@ -12,6 +12,8 @@ tags:
 有沒有想過在短波上面使用像 LINE 的方式跟對方聊天？今天我們要介紹的短波數據模式就是可以實現自由文字聊天。
 
 像 JS8CALL 這類的軟體，雖然跟 VarAC 相似但是最大的差別是 JS8CALL 只能傳輸英文字母無法傳輸 UTF-8 的字符，這使的沒有額外再編碼是無法傳輸中文的。
+
+![picture 18](https://yakumotw.s3.ap-northeast-1.amazonaws.com/783913aa87c1a6a4eef352a2b5fadf084872fdc507628e205fa7b751788d71e7.png)  
 
 ## VARA HF 與 VarAC 的關係是？
 在入門VarAC的玩家們可能會困惑說 VARA 與 VarAC 到底差在哪邊，其實很簡單就是作者不同而兩者軟體扮演的角色不同。
