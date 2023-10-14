@@ -1,5 +1,5 @@
 ---
-title: "電波上的即時通-VarAC"
+title: "短波上的即時通 VarAC 新手教學"
 date: 2023-10-14T15:14:38+09:00
 draft: false
 toc: false
