@@ -3,8 +3,7 @@ title: "當 AI 遇到神道 - 2 GPT-4 Turbo VS Claud 2.1 神社檢定篇"
 date: 2023-11-24T20:41:12+09:00
 draft: false
 toc: false
-images: [(https://yakumotw.s3.ap-northeast-1.amazonaws.com/8252651681876e07d92c0e129e9d5203ce6d40cd874c1b5c1127685220d5a8c8.jpg)  
-]
+images: [https://yakumotw.s3.ap-northeast-1.amazonaws.com/8252651681876e07d92c0e129e9d5203ce6d40cd874c1b5c1127685220d5a8c8.jpg]
 tags:
     - 神道
     - 人工智慧
