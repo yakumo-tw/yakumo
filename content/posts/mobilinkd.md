@@ -1,7 +1,7 @@
 ---
 title: "Mobilinkd APRS 數據機開箱心得"
 date: 2024-06-13T23:02:28+08:00
-draft: true
+draft: false
 toc: false
 images: [(https://yakumotw.s3.ap-northeast-1.amazonaws.com/b5a08b332731f4b80149139f3b461d7b2b75cd3578575245fc9e996fc1ff1341.jpg]
 tags:
