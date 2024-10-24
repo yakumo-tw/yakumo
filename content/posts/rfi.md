@@ -20,8 +20,11 @@ tags:
 ![picture 1](https://yakumotw.s3.ap-northeast-1.amazonaws.com/1730c9ef6c086c9ebf772a37d11f9247c1e93039e416acff60afed2980433d5a.jpg)  
 
 天調的地網。
+![圖 0](https://yakumotw.s3.ap-northeast-1.amazonaws.com/c926da06051201c9cf8b2d7fa64af832218465e8536a8eb723aa61a08ed6fd86.jpg)  
 
 拉進室內的書房。
+
+![圖 3](https://yakumotw.s3.ap-northeast-1.amazonaws.com/04edaee4a84df4b0cbc4f2df384733ebc49a6908aa2917bf3f1c5d26e2924b91.jpg)  
 
 ## 發射時產生的干擾的症狀
 剛開始安裝完成後會產生以下干擾問題。
@@ -47,6 +50,11 @@ tags:
 > 目前實測雖在 40 米波以下不會產生干擾，但是磁環在發射時會有發熱的現象，因此需注意發射時間。
 3. 依照前輩建議把 USB 傳輸線換成 [LINDY](https://s.shopee.tw/3flv2qsqwL) 牌的傳輸線。
 4. 最後在 IC-7300 那側以及電腦側的傳輸線上面繞上 [FT-140-43 磁環](https://world.taobao.com/item/3696064077.htm)
+
+![圖 1](https://yakumotw.s3.ap-northeast-1.amazonaws.com/5b891e8346fd24f4d6afcca49344089ae4f7b5acce1ee7fff775ca77cd8acd1b.jpg) 
+ 
+![圖 2](https://yakumotw.s3.ap-northeast-1.amazonaws.com/60cad495ae8da3b488669d11d72cf45535f734a42e9efeb69b95b71b72fa5da7.jpg)  
+
 5. 調整天調地網的長度。
 
 
