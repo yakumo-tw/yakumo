@@ -1,7 +1,7 @@
 ---
 title: "我的短波 RFI 解決方案"
 date: 2024-10-24T13:59:40+08:00
-draft: true
+draft: false
 toc: false
 images:
 tags:
