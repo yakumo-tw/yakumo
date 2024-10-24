@@ -43,8 +43,8 @@ picture = "i.jpg"
 [permalinks]
   posts = "/posts/:year/:month/:filename/"
 
-[author]
-  name = "BX4ACP"
+# [author]
+  # name = "BX4ACP"
 
 [blackfriday]
   hrefTargetBlank = true
@@ -184,7 +184,7 @@ picture = "i.jpg"
     url  = "https://www.facebook.com/groups/522013876298185"
 
 [languages]
-  [languages.en]
+  [languages.en.params]
     subtitle  = ""
     weight    = 1
     copyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
