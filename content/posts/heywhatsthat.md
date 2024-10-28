@@ -1,7 +1,7 @@
 ---
 title: "Heywhatsthat 一個免費的視距分析網站"
 date: 2024-10-28T18:30:47+08:00
-draft:  TTT
+draft: false
 toc: false
 images:
 tags:
@@ -29,4 +29,18 @@ tags:
 
 ## 使用教學
 介紹完基礎概念後，我們來進行實戰。
-![](photo/1.JPG)
+
+1. 先進入 [Heywhatsthat](https://www.heywhatsthat.com/)。
+![](https://yakumotw.s3.ap-northeast-1.amazonaws.com/2024/10/bf1fed7acfc156d9f543b63b6094f8f8.jpg)
+
+2. 點選 **New panorama** 新增要查詢的點位。
+![](https://yakumotw.s3.ap-northeast-1.amazonaws.com/2024/10/30b619c56873b46d791dc1eaa0dcceb3.JPG)
+
+3. 按住 **Ctrl** 鍵然後用滑鼠拖曳到你要模擬的位置並在左下方的 **Enter a tittle** 處打入 **英文** 的名稱然後按下 **Submit request** 。
+![](https://yakumotw.s3.ap-northeast-1.amazonaws.com/2024/10/5674b3df522a8bfcf99b5451ee34032c.JPG)
+
+4. 最終會顯示模擬出來的視野。以台中太平赤崁頂為例，紅色的區域即是該地點可以看到的地方。
+![](https://yakumotw.s3.ap-northeast-1.amazonaws.com/2024/10/562beff7f4d7be689a9d9149414071b3.JPG)
+
+## 功能的侷限性
+由於這網頁是模擬視距所以未必 100 % 準確，但是可以進行一個大致的評估。
