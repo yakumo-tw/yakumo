@@ -1,7 +1,7 @@
 ---
-title: "基於 Nano PI 開發板的 APRS 解碼方案"
+title: "TMMARC APRS Nano-Pi NEO 專案"
 date: 2024-10-28T23:04:33+08:00
-draft: true
+draft: false
 toc: false
 images: [https://yakumotw.s3.ap-northeast-1.amazonaws.com/2024/10/1ae63aafba2a3729bba57193766facd5.png]
 tags:
@@ -10,6 +10,7 @@ tags:
 ---
 ## 前言
 APRS (全名為： **Automatic Packet Report System** ) 中文稱為自動位置封包回報系統。玩家透過該系統然後經由無線電訊號傳輸來回報自身的位置。在台灣有許多志願者架設 APRS 的接收站台可以接收你報告的位置，並上傳到 aprs.fi 的地圖上。
+
 無論你是使用 [A3 追蹤器](https://yakumo.tw/posts/2024/06/aprsa3/)還是使用[手機連接](https://yakumo.tw/posts/2023/09/aprsphone/)無線電來發射 RF 訊號，皆必須由愛好者所架設 [iGate](https://yakumo.tw/posts/2023/10/igate/) 給接收或 DIGI 轉發；經過幾年的努力，台灣除苗栗、東部外，大多數地點皆能成功回傳座標。
 
 這張地圖藍色的涵蓋範圍，是我們採用 Direwolf TNC 站點進行解碼的效果。
@@ -60,7 +61,7 @@ APRS (全名為： **Automatic Packet Report System** ) 中文稱為自動位置
 ![](https://yakumotw.s3.ap-northeast-1.amazonaws.com/2024/10/87da144413f4f6fb024f0bfd308eebb3.JPG)
 
 ## 我們專案的特色
-* 採用開源的 Direwolf 解碼可靠強大。
+* 採用開源的 Direwolf 解碼可靠強大。透過設定檔可以切換 iGate 與 DIGI 模式
 * 標準的 DATA 連接器可以支援有數據模式的車機。
 * 板上開關可以在 1200 bps 與 9600 bps 之間做切換。
 * 耗電量低適合用在太陽能的場景。
@@ -68,3 +69,7 @@ APRS (全名為： **Automatic Packet Report System** ) 中文稱為自動位置
 * 板上預留 I2C 介面可擴充感測器或其他設備。
 * 板上預留 TNC 介面，可使用支援 APRS KISS 協定的設備控制。
 *	音量可以用板載的精密可調電阻調整。
+## 聯絡方式
+有興趣可以進一步諮詢，請洽Line：nelson1214 。
+
+官方網站：https://www.tmmarc.org
