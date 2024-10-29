@@ -9,18 +9,27 @@ tags:
   - APRS
 ---
 ## 前言
-![](https://yakumotw.s3.ap-northeast-1.amazonaws.com/2024/10/c71361aa8b3c302bcdc4f6977945c914.JPG)
-在之前的[文章](https://yakumo.tw/posts/2023/10/igate/)中，TMMARC 團隊使用了基於電視盒的 iGate 解決方案，但隨著專案持續的進化，電視盒的穩定度以及效能的擴充性受到了嚴峻的挑戰，因此這次 TMMARC 採用了執行 Linux 的 NEO PI 進行介面板的開發。
+APRS (全名為： **Automatic Packet Report System** ) 中文稱為自動位置封包回報系統。玩家透過該系統然後經由無線電訊號傳輸來回報自身的位置。在台灣有許多志願者架設 APRS 的接收站台可以接收你報告的位置，並上傳到 aprs.fi 的地圖上。
+無論你是使用 [A3 追蹤器](https://yakumo.tw/posts/2024/06/aprsa3/)還是使用[手機連接](https://yakumo.tw/posts/2023/09/aprsphone/)無線電來發射 RF 訊號，皆必須由愛好者所架設 [iGate](https://yakumo.tw/posts/2023/10/igate/) 給接收或 DIGI 轉發；經過幾年的努力，台灣除苗栗、東部外，大多數地點皆能成功回傳座標。
 
-OLED螢幕會顯示以下資訊：
+這張地圖藍色的涵蓋範圍，是我們採用 Direwolf TNC 站點進行解碼的效果。
+![](https://yakumotw.s3.ap-northeast-1.amazonaws.com/2024/10/c71361aa8b3c302bcdc4f6977945c914.JPG)
+
+[Direwolf](https://github.com/wb2osz/direwolf)是火腿 WB2OSZ 開發的解碼軟體，有著開放原始碼以及跨平台運作的能力，由於解碼能力十分的優秀，因此我們的專案採用它來當 TNC 。
+
+在之前的[文章](https://yakumo.tw/posts/2023/10/igate/)，TMMARC 團隊使用基於電視盒運作的 Direwolf iGate 作為解決方案，但隨著專案持續的進化，電視盒的穩定度以及效能的擴充性受到了嚴峻的挑戰，此次 TMMARC 改用了執行 Linux 的 NEO PI 並進行介面板的開發。
+
+## 展示
+與電視盒方案一樣，採用了 Linux 方案的作業系統並且執行開放原始碼的 Direwolf 解碼軟體，由於 NEO PI 有 GPIO 擴充口，所以我們設計了一個擴充板疊在 NEO PI 上面並且透過 3D 列印機設計了一個外殼。
+
+我們設計的 OLED 螢幕會顯示以下資訊：
 1. 接收封包的呼號。
 2. 接收封包音量。
 3. PR 封包類型
 4. 經緯度與時速。
 5. 與自身站台的方位角。
+
 ![](https://yakumotw.s3.ap-northeast-1.amazonaws.com/2024/10/1ae63aafba2a3729bba57193766facd5.png)
-## 展示
-與電視盒方案一樣，採用了 Linux 方案的作業系統並且執行開放原始碼的 Direwolf 解碼軟體，由於 NEO PI 有 GPIO 擴充口，所以我們設計了一個擴充板疊在 NEO PI 上面並且透過 3D 列印機設計了一個外殼。
 
 ![](https://yakumotw.s3.ap-northeast-1.amazonaws.com/2024/10/9750915df23df04d43889fb154de3b37.jpg)
 
