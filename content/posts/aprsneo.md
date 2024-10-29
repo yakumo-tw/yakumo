@@ -1,5 +1,5 @@
 ---
-title: "APRS NEO 介紹"
+title: "基於 Nano PI 開發板的 APRS 解碼方案"
 date: 2024-10-28T23:04:33+08:00
 draft: true
 toc: false
@@ -17,10 +17,10 @@ APRS (全名為： **Automatic Packet Report System** ) 中文稱為自動位置
 
 [Direwolf](https://github.com/wb2osz/direwolf)是火腿 WB2OSZ 開發的解碼軟體，有著開放原始碼以及跨平台運作的能力，由於解碼能力十分的優秀，因此我們的專案採用它來當 TNC 。
 
-在之前的[文章](https://yakumo.tw/posts/2023/10/igate/)，TMMARC 團隊使用基於電視盒運作的 Direwolf iGate 作為解決方案，但隨著專案持續的進化，電視盒的穩定度以及效能的擴充性受到了嚴峻的挑戰，此次 TMMARC 改用了執行 Linux 的 NEO PI 並進行介面板的開發。
+在之前的[文章](https://yakumo.tw/posts/2023/10/igate/)，TMMARC 團隊使用基於電視盒運作的 Direwolf iGate 作為解決方案，但隨著專案持續的進化，電視盒的穩定度以及效能的擴充性受到了嚴峻的挑戰，此次 TMMARC 改用了執行 Linux 的 Nano PI 並進行介面板的開發。
 
 ## 展示
-與電視盒方案一樣，採用了 Linux 方案的作業系統並且執行開放原始碼的 Direwolf 解碼軟體，由於 NEO PI 有 GPIO 擴充口，所以我們設計了一個擴充板疊在 NEO PI 上面並且透過 3D 列印機設計了一個外殼。
+與電視盒方案一樣，採用了 Linux 方案的作業系統並且執行開放原始碼的 Direwolf 解碼軟體，由於 Nano PI 有 GPIO 擴充口，所以我們設計了一個擴充板疊在 Nano PI 上面並且透過 3D 列印機設計了一個外殼。
 
 我們設計的 OLED 螢幕會顯示以下資訊：
 1. 接收封包的呼號。
@@ -45,7 +45,7 @@ APRS (全名為： **Automatic Packet Report System** ) 中文稱為自動位置
 
 ![](https://yakumotw.s3.ap-northeast-1.amazonaws.com/2024/10/ae94be358c1ff070512ddf67b4cb305d.jpg)
 
-組裝起來後並且跟特定型號車機的 DATA 孔進行連接。 OLED 上面會顯示 Direwolf 即時解碼的封包資訊。
+組裝起來後與車機的 DATA 孔進行連接。 OLED 上面會顯示 Direwolf 即時解碼的封包資訊。
 
 ![](https://yakumotw.s3.ap-northeast-1.amazonaws.com/2024/10/70271d16e1f303fc20a95a384e8d0995.jpg)
 
