@@ -2,10 +2,8 @@ name: "IndexNow"
 on:
   push:
     branches:
-    	# when git push to the master branch
       - master
   schedule:
-    # scheduled in UTC.
     - cron:  '0 0,12 * * *'
 
 jobs:
