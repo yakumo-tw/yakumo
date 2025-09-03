@@ -41,7 +41,7 @@ disable404     = false
 disableHugoGeneratorInject = false
 picture = "i.jpg"
 [permalinks]
-  posts = "/posts/:year/:month/:filename/"
+  posts = "/posts/:year/:month/:contentbasename/"
 
 # [author]
   # name = "BX4ACP"
