@@ -31,4 +31,4 @@ APRS 是一個由各個火腿共同架設站台 (iGate) 和轉發站 (Digi) 的�
 以上就是大家玩 APRS 的時候建議需要注意的部分，如果有問題歡迎詢問。
 祝大家 APRS 玩的開心。
 ***
-# 更多精彩文章[請點我](https://yakumo.tw/posts/2023/09/)
+# 更多精彩文章[請點我](https://yakumo.tw/tags/%E6%A5%AD%E9%A4%98%E7%84%A1%E7%B7%9A%E9%9B%BB/)

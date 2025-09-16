@@ -57,4 +57,4 @@ tags:
 
 
 ***
-# 更多精彩文章[請點我](https://yakumo.tw/posts/2023/09/)
+# 更多精彩文章[請點我](https://yakumo.tw/tags/%E6%A5%AD%E9%A4%98%E7%84%A1%E7%B7%9A%E9%9B%BB/)
