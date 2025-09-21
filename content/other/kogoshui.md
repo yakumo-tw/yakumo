@@ -3,7 +3,7 @@ title: "古語拾遺讀書筆記"
 date: 2025-09-19T12:04:41+08:00
 draft: false
 toc: true
-images: [(https://yakumotw.s3.ap-northeast-1.amazonaws.com/2025/09/0b8c5dc9ecbc1a20c63d82923ba7bc7d.png]
+images: [https://yakumotw.s3.ap-northeast-1.amazonaws.com/2025/09/0b8c5dc9ecbc1a20c63d82923ba7bc7d.png]
 tags:
   - 神道
 ---
