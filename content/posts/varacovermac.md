@@ -1,7 +1,7 @@
 ---
 title: "成功讓 VarAC 與 VARA 在最新的 MacOS 上面運作"
 date: 2026-02-20T11:09:50+08:00
-draft: true
+draft: false
 toc: false
 images: [https://yakumotw.s3.ap-northeast-1.amazonaws.com/2026/02/55a12869705348df6f7997151eb666e6.png]
 tags:
