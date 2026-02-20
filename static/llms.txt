@@ -1,0 +1,21 @@
+# yakumo.tw
+
+> Personal technical blog focused on amateur radio, GNSS, and related notes.
+
+Site: https://yakumo.tw/
+Language: zh-TW
+Sitemap: https://yakumo.tw/sitemap.xml
+RSS: https://yakumo.tw/index.xml
+Robots: https://yakumo.tw/robots.txt
+
+## Primary Sections
+- Posts: https://yakumo.tw/posts/
+- GNSS: https://yakumo.tw/gnss/
+- Other Notes: https://yakumo.tw/other/
+- About: https://yakumo.tw/about/me/
+
+## Crawling Guidance
+- Public pages may be crawled and indexed.
+- Prefer canonical URLs for indexing.
+- Prefer sitemap and RSS for discovery.
+- Respect robots.txt directives and crawl politely.

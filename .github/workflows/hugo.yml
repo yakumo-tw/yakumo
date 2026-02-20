@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  HUGO_VERSION: "0.149.0"  # 先鎖一個你本機測過的穩定版；之後要升再改這裡
+  HUGO_VERSION: "0.156.0"  # 與本機版本一致，避免 CI/本機行為不一致
   HUGO_EXTENDED: "true"
 
 jobs:
@@ -40,13 +40,12 @@ jobs:
           hugo-version: ${{ env.HUGO_VERSION }}
           extended: ${{ env.HUGO_EXTENDED }}
 
-      # 若 theme 需要 PostCSS/SASS 前處理，打開這段並在專案有 package.json
-      # - name: Setup Node
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version: "20"
-      # - name: Install frontend deps
-      #   run: npm ci
+      - name: Setup Node (for Dart Sass)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Dart Sass Embedded
+        run: npm install --global sass-embedded
 
       - name: Build
         run: hugo --minify
@@ -66,4 +65,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-

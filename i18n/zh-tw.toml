@@ -1,0 +1,5 @@
+[pagination.olderPosts]
+other = "較舊文章"
+
+[pagination.newerPosts]
+other = "較新文章"

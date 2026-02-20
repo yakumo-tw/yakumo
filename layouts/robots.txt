@@ -1,1 +1,22 @@
 User-agent: *
+Allow: /
+
+# AI / LLM crawler allowlist (explicitly allowed; covered by '*' as well)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# AI content map
+# llms.txt: {{ "llms.txt" | absURL }}
+Sitemap: {{ "sitemap.xml" | absURL }}

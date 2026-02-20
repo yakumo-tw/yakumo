@@ -1,6 +1,7 @@
 baseURL = "https://yakumo.tw"
 title   = "八雲"
 languageCode = "zh-tw"
+defaultContentLanguage = "zh-tw"
 theme = "hello-friend-ng"
 
 PygmentsCodeFences = true
@@ -12,7 +13,6 @@ PygmentsStyle = "monokai"
   priority = -1
 
 paginate  = 10
-rssLimit  = 10  # Maximum number of items in the RSS feed.
 copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License." # This message is only used by the RSS template.
 
 [services]
@@ -20,6 +20,8 @@ copyright = "This work is licensed under a Creative Commons Attribution-NonComme
     id = "G-K0T9F7QY35"
   [services.disqus]
     shortname = ""
+  [services.rss]
+    limit = 10
 
 archetypeDir = "archetypes"
 contentDir   = "content"
@@ -32,7 +34,6 @@ buildFuture  = false
 buildExpired = false
 canonifyURLs = true
 
-enableRobotsTXT = true
 enableEmoji     = true
 enableMissingTranslationPlaceholders = false
 disableRSS     = false
@@ -43,8 +44,8 @@ picture = "i.jpg"
 [permalinks]
   posts = "/posts/:year/:month/:contentbasename/"
 
-# [author]
-  # name = "BX4ACP"
+[author]
+  name = "BX4ACP"
 
 [blackfriday]
   hrefTargetBlank = true
@@ -70,7 +71,7 @@ picture = "i.jpg"
   homeSubtitle = "八雲立つ　出雲八重垣　妻ごみに　八重垣つくる　その八重垣を"
 
   # Set a background for the homepage
-   backgroundImage = "static/i.jpg"
+  backgroundImage = "/i.jpg"
 
   # Prefix of link to the git commit detail page. GitInfo must be enabled.
   #
@@ -152,6 +153,9 @@ picture = "i.jpg"
     # Append the current url pathname to logoText 
     # logoCursorPathname = true
 
+  [params.author]
+    name = "BX4ACP"
+
   # Commento is more than just a comments widget you can embed — 
   # it’s a return to the roots of the internet. 
   # An internet without the tracking and invasions of privacy. 
@@ -184,10 +188,10 @@ picture = "i.jpg"
     url  = "https://www.facebook.com/groups/522013876298185"
 
 [languages]
-  [languages.en.params]
-    subtitle  = ""
-    weight    = 1
-    copyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
+  [languages.zh-tw]
+    languageName = "繁體中文"
+    languageCode = "zh-tw"
+    weight = 1
 
 #  [languages.fr]
 #    subtitle  = "Hello Friend NG Theme"
